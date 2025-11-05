@@ -1,4 +1,4 @@
-# Aplivativo_Mobile_Chate# ChatApp - Aplicativo de Mensagens em Tempo Real
+# ChatApp - Aplicativo de Mensagens em Tempo Real
 
 Aplicativo mobile de chat desenvolvido em Flutter com backend Supabase, seguindo as especificações do projeto da disciplina de Programação para Dispositivos Móveis.
 
