@@ -44,8 +44,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Cadastro realizado com sucesso!'),
-            backgroundColor: Colors.green,
+            content: Text('Cadastro realizado! Se aparecer erro de "email não confirmado", desative a confirmação no Supabase: Authentication > Settings > Email Auth > Disable Email Confirmations'),
+            backgroundColor: Colors.orange,
+            duration: Duration(seconds: 8),
           ),
         );
         Navigator.of(context).pushReplacement(

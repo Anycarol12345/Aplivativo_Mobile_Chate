@@ -49,8 +49,8 @@ Aplicativo mobile de chat desenvolvido em Flutter com backend Supabase, seguindo
 
 \`\`\`dart
 await Supabase.initialize(
-url: 'SUA_URL_DO_SUPABASE', // Cole a Project URL aqui
-anonKey: 'SUA_CHAVE_ANONIMA', // Cole a anon key aqui
+  url: 'SUA_URL_DO_SUPABASE',  // Cole a Project URL aqui
+  anonKey: 'SUA_CHAVE_ANONIMA', // Cole a anon key aqui
 );
 \`\`\`
 
@@ -70,17 +70,17 @@ flutter run
 
 \`\`\`
 lib/
-├── main.dart # Ponto de entrada e configuração do Supabase
+├── main.dart                 # Ponto de entrada e configuração do Supabase
 ├── models/
-│ └── conversation_model.dart # Modelo de dados das conversas
+│   └── conversation_model.dart  # Modelo de dados das conversas
 ├── screens/
-│ ├── login_screen.dart # Tela de login
-│ ├── register_screen.dart # Tela de cadastro
-│ └── home_screen.dart # Tela principal com lista de conversas
+│   ├── login_screen.dart     # Tela de login
+│   ├── register_screen.dart  # Tela de cadastro
+│   └── home_screen.dart      # Tela principal com lista de conversas
 ├── services/
-│ └── auth_service.dart # Serviço de autenticação
+│   └── auth_service.dart     # Serviço de autenticação
 └── widgets/
-└── conversation_item.dart # Widget de item de conversa
+    └── conversation_item.dart # Widget de item de conversa
 \`\`\`
 
 ## Funcionalidades Implementadas
@@ -95,14 +95,12 @@ lib/
 ## Próximos Passos (Conforme Cronograma)
 
 ### Semanas 3-4: Conversas e Mensagens
-
 - [ ] Criar tabelas no Supabase (users, conversations, messages)
 - [ ] Implementar tela de chat individual
 - [ ] Envio e recebimento de mensagens em tempo real
 - [ ] Upload de imagens
 
 ### Semana 5: Funcionalidades Adicionais
-
 - [ ] Busca de usuários
 - [ ] Criação de grupos
 - [ ] Reações a mensagens
@@ -110,7 +108,6 @@ lib/
 - [ ] Status online/offline
 
 ### Semana 6: Testes e Ajustes
-
 - [ ] Testes de funcionalidades
 - [ ] Correção de bugs
 - [ ] Otimizações de performance
@@ -125,13 +122,72 @@ As tabelas necessárias serão criadas no Supabase SQL Editor:
 - `messages` - Mensagens enviadas
 - `conversation_participants` - Participantes das conversas
 
+### ⚠️ IMPORTANTE: Executar Scripts SQL no Supabase
+
+**Antes de usar o chat, você DEVE executar os scripts SQL no Supabase:**
+
+1. Acesse seu projeto no [Supabase Dashboard](https://app.supabase.com)
+2. No menu lateral, clique em **SQL Editor**
+3. Clique em **New Query** (ou "Nova Consulta")
+4. Copie e cole o conteúdo de cada script SQL na ordem abaixo:
+
+#### Ordem de Execução dos Scripts:
+
+1. **`scripts/01_create_tables.sql`** - Cria todas as tabelas necessárias
+   - Copie todo o conteúdo do arquivo
+   - Cole no SQL Editor
+   - Clique em **Run** (ou pressione Ctrl+Enter)
+   - Aguarde a mensagem de sucesso
+
+2. **`scripts/02_enable_realtime.sql`** - Ativa mensagens em tempo real
+   - Copie todo o conteúdo
+   - Cole no SQL Editor
+   - Execute
+
+3. **`scripts/03_rls_policies.sql`** - Configura segurança das tabelas
+   - Copie todo o conteúdo
+   - Cole no SQL Editor
+   - Execute
+
+4. **`scripts/04_functions.sql`** - Cria funções auxiliares
+   - Copie todo o conteúdo
+   - Cole no SQL Editor
+   - Execute
+
+5. **`scripts/05_storage.sql`** - Configura armazenamento de arquivos
+   - Copie todo o conteúdo
+   - Cole no SQL Editor
+   - Execute
+
+#### Verificar se as Tabelas Foram Criadas:
+
+Após executar os scripts, verifique no menu **Table Editor** se as seguintes tabelas existem:
+- profiles
+- conversations
+- conversation_participants
+- messages
+- message_reactions
+- typing_indicators
+
+Se todas as tabelas aparecerem, o banco está configurado corretamente! 🎉
+
 ## Segurança
 
 O projeto utiliza Row Level Security (RLS) do Supabase para garantir que:
-
 - Usuários só acessem suas próprias conversas
 - Mensagens sejam visíveis apenas para participantes
 - Dados sensíveis sejam protegidos
+
+## Suporte
+
+Para dúvidas sobre o projeto, consulte:
+- [Documentação do Flutter](https://flutter.dev/docs)
+- [Documentação do Supabase](https://supabase.com/docs)
+- Professor: Gustavo Meneghetti Arcolezi
+
+## Data de Entrega
+
+**25/11/2025** - Apresentação final do projeto
 
 ## Licença
 

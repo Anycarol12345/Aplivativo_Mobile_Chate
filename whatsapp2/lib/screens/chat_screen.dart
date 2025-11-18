@@ -74,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _showMessageOptions(Message message) {
-    final currentUserId = _authService.currentUser?.id;
+    final currentUserId = _authService.currentUserId;
     final isMyMessage = message.senderId == currentUserId;
 
     showModalBottomSheet(
@@ -191,7 +191,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUserId = _authService.currentUser?.id;
+    final currentUserId = _authService.currentUserId;
 
     return Scaffold(
       backgroundColor: const Color(0xFFECE5DD),
@@ -206,7 +206,15 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             CircleAvatar(
               radius: 18,
-              backgroundImage: NetworkImage(widget.conversation.profileImageUrl),
+              backgroundColor: Colors.teal.shade700,
+              child: Text(
+                widget.conversation.contactName[0].toUpperCase(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -261,7 +269,23 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 if (snapshot.hasError) {
                   return Center(
-                    child: Text('Erro: ${snapshot.error}'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Erro ao carregar mensagens',
+                          style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '${snapshot.error}',
+                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   );
                 }
 

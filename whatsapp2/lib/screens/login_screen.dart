@@ -31,22 +31,39 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.signIn(
+      final response = await _authService.signIn(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
 
-      if (mounted) {
+      if (response.user != null && mounted) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const HomeScreen()),
         );
+      } else {
+        throw Exception('Falha na autenticação');
       }
     } catch (e) {
       if (mounted) {
+        String errorMessage = 'Erro ao fazer login';
+        
+        if (e.toString().contains('email_not_confirmed')) {
+          errorMessage = 'Email não confirmado. Verifique sua caixa de entrada ou desative a confirmação no Supabase (Authentication > Settings > Email Auth > Disable Email Confirmations)';
+        } else if (e.toString().contains('Invalid login credentials')) {
+          errorMessage = 'Email ou senha incorretos';
+        } else if (e.toString().contains('User not found')) {
+          errorMessage = 'Usuário não encontrado';
+        } else {
+          errorMessage = e.toString();
+        }
+        
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro ao fazer login: ${e.toString()}'),
+            content: Text(errorMessage),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }

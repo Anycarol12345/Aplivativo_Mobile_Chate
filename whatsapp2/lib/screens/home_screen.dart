@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       contactName: 'Maria Silva',
       lastMessage: 'Oi! Tudo bem? Vamos nos encontrar hoje?',
       time: '14:32',
-      profileImageUrl: 'https://i.pravatar.cc/150?img=1',
+      profileImageUrl: '',
       unreadCount: 3,
       isOnline: true,
     ),
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       contactName: 'João Santos',
       lastMessage: 'Obrigado pela ajuda!',
       time: '13:15',
-      profileImageUrl: 'https://i.pravatar.cc/150?img=2',
+      profileImageUrl: '',
       unreadCount: 0,
       isOnline: false,
     ),
@@ -39,27 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
       contactName: 'Ana Costa',
       lastMessage: 'Você viu o documento que enviei?',
       time: '11:48',
-      profileImageUrl: 'https://i.pravatar.cc/150?img=3',
+      profileImageUrl: '',
       unreadCount: 1,
       isOnline: true,
-    ),
-    Conversation(
-      id: '4',
-      contactName: 'Pedro Oliveira',
-      lastMessage: 'Até amanhã! 👋',
-      time: '10:22',
-      profileImageUrl: 'https://i.pravatar.cc/150?img=4',
-      unreadCount: 0,
-      isOnline: false,
-    ),
-    Conversation(
-      id: '5',
-      contactName: 'Carla Mendes',
-      lastMessage: 'Perfeito! Combinado então.',
-      time: 'Ontem',
-      profileImageUrl: 'https://i.pravatar.cc/150?img=5',
-      unreadCount: 0,
-      isOnline: false,
     ),
   ];
 
@@ -127,7 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.search, color: Colors.white),
             onPressed: () {
-              // Implementar busca
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Busca em desenvolvimento')),
+              );
             },
           ),
           PopupMenuButton<String>(
@@ -201,7 +185,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Iniciar nova conversa
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Nova conversa em desenvolvimento')),
+          );
         },
         backgroundColor: const Color(0xFF26A69A),
         elevation: 4,

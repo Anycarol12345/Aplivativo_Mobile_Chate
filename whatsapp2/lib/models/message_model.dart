@@ -8,7 +8,6 @@ class Message {
   final DateTime createdAt;
   final DateTime? editedAt;
   final bool isDeleted;
-  final String? mediaUrl;
 
   Message({
     required this.id,
@@ -20,13 +19,12 @@ class Message {
     required this.createdAt,
     this.editedAt,
     this.isDeleted = false,
-    this.mediaUrl,
   });
 
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
-      id: json['id'] as String,
-      conversationId: json['conversation_id'] as String,
+      id: json['id'].toString(),
+      conversationId: json['conversation_id'].toString(),
       senderId: json['sender_id'] as String,
       senderName: json['sender_name'] as String? ?? 'Usuário',
       content: json['content'] as String,
@@ -39,7 +37,6 @@ class Message {
           ? DateTime.parse(json['edited_at'] as String) 
           : null,
       isDeleted: json['is_deleted'] as bool? ?? false,
-      mediaUrl: json['media_url'] as String?,
     );
   }
 
@@ -54,7 +51,6 @@ class Message {
       'created_at': createdAt.toIso8601String(),
       'edited_at': editedAt?.toIso8601String(),
       'is_deleted': isDeleted,
-      'media_url': mediaUrl,
     };
   }
 

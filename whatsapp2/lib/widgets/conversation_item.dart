@@ -11,6 +11,41 @@ class ConversationItem extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
+  Widget _buildAvatar() {
+    final initials = conversation.contactName
+        .split(' ')
+        .take(2)
+        .map((e) => e.isNotEmpty ? e[0].toUpperCase() : '')
+        .join('');
+    
+    // Cores baseadas na primeira letra do nome
+    final colors = [
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.red,
+      Colors.teal,
+      Colors.indigo,
+      Colors.pink,
+    ];
+    
+    final colorIndex = conversation.contactName.codeUnitAt(0) % colors.length;
+    
+    return CircleAvatar(
+      radius: 28,
+      backgroundColor: colors[colorIndex],
+      child: Text(
+        initials,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -22,11 +57,7 @@ class ConversationItem extends StatelessWidget {
             // Profile Image with online indicator
             Stack(
               children: [
-                CircleAvatar(
-                  radius: 28,
-                  backgroundImage: NetworkImage(conversation.profileImageUrl),
-                  backgroundColor: Colors.grey[300],
-                ),
+                _buildAvatar(), // Usando avatar com iniciais
                 if (conversation.isOnline)
                   Positioned(
                     bottom: 0,
